@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Shop 88 | Auto-Profit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+    <nav class="p-5 bg-blue-600 flex justify-between items-center shadow-2xl">
+        <h1 class="text-2xl font-black tracking-tighter">ESHOP 88</h1>
+        <div class="flex items-center gap-2">
+            <span class="w-3 h-3 bg-green-500 rounded-full animate-ping"></span>
+            <span class="text-xs font-bold">KI-SYSTEM AKTIV</span>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4 max-w-4xl">
+        
+        <div class="grid grid-cols-1 gap-4 mb-8">
+            <div class="bg-gray-800 p-8 rounded-3xl border-2 border-blue-500 text-center shadow-lg">
+                <p class="text-gray-400 uppercase text-xs font-bold tracking-widest">Gesammeltes Guthaben</p>
+                <h2 class="text-5xl font-mono mt-2 text-green-400" id="balance">0,00 €</h2>
+                <div class="mt-6 flex justify-center gap-3">
+                    <button onclick="manageBudget('Auszahlen')" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-bold text-sm shadow-lg transition-all">
+                        Auszahlen
+                    </button>
+                    <button onclick="manageBudget('Reinvestieren')" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-bold text-sm shadow-lg transition-all">
+                        Reinvestieren
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 rounded-3xl p-6 shadow-inner border border-gray-700">
+            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                🚀 Live Deal-Scanner
+            </h3>
+            <div id="deals-list" class="space-y-4 text-sm text-gray-400 italic">
+                Suche nach profitablen Angeboten...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Budget-Verwaltung nach deinem Wunsch
+        function manageBudget(typ) {
+            const antwort = confirm("Möchtest du das Budget wirklich " + typ + "?\n(Aktueller Stand: 0,00 €)");
+            if(antwort) {
+                alert("Anfrage gesendet! Ich warte auf den nächsten Provisions-Zyklus, um " + typ + " durchzuführen.");
+            }
+        }
+
+        // Automatische Erstellung von Content
+        const mockDeals = [
+            { name: "Premium Noise Cancelling Kopfhörer", gain: "+ 14,20 €", link: "https://amazon.de" },
+            { name: "Smart Home Sicherheits-Set", gain: "+ 21,50 €", link: "https://amazon.de" },
+            { name: "4K Action-Kamera (KI-Edition)", gain: "+ 32,10 €", link: "https://amazon.de" }
+        ];
+
+        setTimeout(() => {
+            const container = document.getElementById('deals-list');
+            container.innerHTML = mockDeals.map(deal => `
+                <div class="flex justify-between items-center bg-gray-900 p-4 rounded-2xl border border-gray-700 hover:border-blue-500 transition-colors">
+                    <div>
+                        <p class="text-white font-bold">${deal.name}</p>
+                        <p class="text-green-400 text-xs">${deal.gain} Provision möglich</p>
+                    </div>
+                    <a href="${deal.link}" target="_blank" class="bg-gray-700 px-4 py-2 rounded-xl text-xs text-white hover:bg-gray-600">Link</a>
+                </div>
+            `).join('');
+        }, 1500);
+    </script>
+</body>
+</html>
